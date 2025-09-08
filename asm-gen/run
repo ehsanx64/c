@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+SRC=hello
+
+# Delete output files
+delete_output_files() {
+    rm -f $SRC $SRC.o $SRC.s
+}
+
+# Compile the C source into assembly and assemble the s file into object code
+# in the end use the gcc to link the object file into an ELF binary
+build_the_stuff() {
+    gcc -S $SRC.c
+    as -o $SRC.o $SRC.s
+    gcc -o $SRC $SRC.o
+}
+
+case "$1" in
+    clean)
+        delete_output_files
+        ;;
+
+    build)
+        delete_output_files
+        build_the_stuff
+        ;;
+
+    *)
+        build_the_stuff
+        ./hello
+        ;;
+esac
+
