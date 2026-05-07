@@ -1,14 +1,15 @@
 CC=gcc
 OBJ=main.o
+BIN=helloworld
 
 run: main
-	./main
+	./$(BIN)
 
 main: $(OBJ)
-	$(CC) $(OBJ) -o main
+	$(CC) $(OBJ) -o $(BIN)
 
 %.o: %.c
 	$(CC) -c $< -o $@
 
 clean:
-	rm main $(OBJ)
+	rm $(BIN) $(OBJ)
